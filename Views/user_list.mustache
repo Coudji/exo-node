@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma liste d'utilisateur</title>
+</head>
+<body>
+    <ul>
+        {{#users}}
+            <li>
+                {{firstName}} {{lastName}}
+                <button data-id={{id}} {{#isCurrentRole}} {{role}} User {{/isCurrentRole}} value="User">Utilisateur</button>
+                <button data-id={{id}} {{#isCurrentRole}} {{role}} Admin {{/isCurrentRole}} value="Admin">Administrateur</button>
+            </li>
+        {{/users}}
+    </ul>
+</body>
+<script>
+    const buttons = document.querySelectorAll("[data-id]");
+    for (const button of buttons) {
+        button.addEventListener("click", (event) => {
+            const id = event.target.getAttribute('data-id');
+            const role = event.target.getAttribute('value');
+            fetch(`http://localhost:8081/users/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    role 
+                })
+            }).then(() => {
+                // location.href = url de la page actuel
+                location.href = location.href;
+            })
+        })
+    }
+</script>
+</html>

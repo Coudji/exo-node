@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:8
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: test123*
+      MYSQL_DATABASE: bot-exo
+      MYSQL_USER: bot-exo
+      MYSQL_PASSWORD: bot-exo
